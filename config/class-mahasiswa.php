@@ -3,28 +3,32 @@
 // Memasukkan file konfigurasi database
 include_once 'db-config.php';
 
-class Mahasiswa extends Database {
+class Penduduk extends Database {
 
-    // Method untuk input data mahasiswa
-    public function inputMahasiswa($data){
+    // Method untuk input data Penduduk
+    public function inputPenduduk($data){
         // Mengambil data dari parameter $data
-        $nim      = $data['nim'];
-        $nama     = $data['nama'];
-        $prodi    = $data['prodi'];
-        $alamat   = $data['alamat'];
-        $provinsi = $data['provinsi'];
-        $email    = $data['email'];
-        $telp     = $data['telp'];
-        $status   = $data['status'];
+        $nik          = $data['nik'];
+        $nama         = $data['nama'];
+        $tempat       = $data['tempat'];
+        $tanggal      = $data['tanggal'];
+        $tahun        = $data['tahun'];
+        $provinsi     = $data['provinsi'];
+        $domisili     = $data['domisili'];
+        $perkerjaan   = $data['perkerjaan'];
+        $agama        = $data['agama'];
+        $gender       = $data['gender'];
+        $status       = $data['status'];
+        $alamat       = $data['alamat'];
         // Menyiapkan query SQL untuk insert data menggunakan prepared statement
-        $query = "INSERT INTO tb_mahasiswa (nim_mhs, nama_mhs, prodi_mhs, alamat, provinsi, email, telp, status_mhs) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO tb_penduduk (nik, nama, tmpt_lahir, tgl_lahir, thn_lahir, provinsi, domisili, perkerjaan, agama, gender, sts, alamat,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)";
         $stmt = $this->conn->prepare($query);
         // Mengecek apakah statement berhasil disiapkan
         if(!$stmt){
             return false;
         }
         // Memasukkan parameter ke statement
-        $stmt->bind_param("ssssssss", $nim, $nama, $prodi, $alamat, $provinsi, $email, $telp, $status);
+        $stmt->bind_param("ssssssssssss", $nik, $nama, $tempat, $tanggal, $tahun , $provinsi , $domisili , $perkerjaan , $agama , $gender , $status ,  $alamat);
         $result = $stmt->execute();
         $stmt->close();
         // Mengembalikan hasil eksekusi query
@@ -32,10 +36,10 @@ class Mahasiswa extends Database {
     }
 
     // Method untuk mengambil semua data mahasiswa
-    public function getAllMahasiswa(){
+    public function getAllPenduduk(){
         // Menyiapkan query SQL untuk mengambil data mahasiswa beserta prodi dan provinsi
-        $query = "SELECT id_mhs, nim_mhs, nama_mhs, nama_prodi, nama_provinsi, alamat, email, telp, status_mhs 
-                  FROM tb_mahasiswa
+        $query = "SELECT nik, nama, tmpt_lahir, tgl_lahir, thn_lahir, provinsi, domisili, perkerjaan, agama, gender, sts, alamat,
+                  FROM tb_penduduk
                   JOIN tb_prodi ON prodi_mhs = kode_prodi
                   JOIN tb_provinsi ON provinsi = id_provinsi";
         $result = $this->conn->query($query);
