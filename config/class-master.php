@@ -5,20 +5,20 @@ include_once 'db-config.php';
 
 class MasterData extends Database {
 
-    // Method untuk mendapatkan daftar program studi
+    // Method untuk mendapatkan daftar agama
     public function getProdi(){
-        $query = "SELECT * FROM tb_prodi";
+        $query = "SELECT * FROM tb_agama";
         $result = $this->conn->query($query);
-        $prodi = [];
+        $agama = [];
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $prodi[] = [
-                    'id' => $row['kode_prodi'],
-                    'nama' => $row['nama_prodi']
+                $agama[] = [
+                    'id' => $row['id_agama'],
+                    'nama' => $row['nama_agama']
                 ];
             }
         }
-        return $prodi;
+        return $agama;
     }
 
     // Method untuk mendapatkan daftar provinsi
@@ -49,22 +49,22 @@ class MasterData extends Database {
 
     // Method untuk input data program studi
     public function inputProdi($data){
-        $kodeProdi = $data['kode'];
-        $namaProdi = $data['nama'];
-        $query = "INSERT INTO tb_prodi (kode_prodi, nama_prodi) VALUES (?, ?)";
+        $idAgama = $data['id'];
+        $namaAgama = $data['nama'];
+        $query = "INSERT INTO tb_agama (id_agama, nama_agama) VALUES (?, ?)";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
-        $stmt->bind_param("ss", $kodeProdi, $namaProdi);
+        $stmt->bind_param("ss", $idAgama, $namaAgama);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
     }
 
-    // Method untuk mendapatkan data program studi berdasarkan kode
+    // Method untuk mendapatkan data agama berdasarkan id
     public function getUpdateProdi($id){
-        $query = "SELECT * FROM tb_prodi WHERE kode_prodi = ?";
+        $query = "SELECT * FROM tb_agama WHERE id_agama = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
@@ -76,32 +76,32 @@ class MasterData extends Database {
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
             $prodi = [
-                'id' => $row['kode_prodi'],
-                'nama' => $row['nama_prodi']
+                'id' => $row['id_agama'],
+                'nama' => $row['nama_agama']
             ];
         }
         $stmt->close();
         return $prodi;
     }
 
-    // Method untuk mengedit data program studi
+    // Method untuk mengedit data agama
     public function updateProdi($data){
-        $kodeProdi = $data['kode'];
-        $namaProdi = $data['nama'];
-        $query = "UPDATE tb_prodi SET nama_prodi = ? WHERE kode_prodi = ?";
+        $idAgama   = $data['id'];
+        $namaAgama = $data['nama'];
+        $query = "UPDATE tb_agama SET nama_agama = ? WHERE id_agama = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
         }
-        $stmt->bind_param("ss", $namaProdi, $kodeProdi);
+        $stmt->bind_param("ss", $namaAgama, $idAgama);
         $result = $stmt->execute();
         $stmt->close();
         return $result;
     }
 
-    // Method untuk menghapus data program studi
+    // Method untuk menghapus data  agama
     public function deleteProdi($id){
-        $query = "DELETE FROM tb_prodi WHERE kode_prodi = ?";
+        $query = "DELETE FROM tb_agama WHERE id_agama = ?";
         $stmt = $this->conn->prepare($query);
         if(!$stmt){
             return false;
