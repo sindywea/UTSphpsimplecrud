@@ -3,7 +3,7 @@
 include_once 'config/class-master.php';
 $master = new MasterData();
 // Mengambil daftar program studi, provinsi, dan status mahasiswa
-$prodiList = $master->getProdi();
+$prodiList = $master->getAgama();
 // Mengambil daftar provinsi
 $provinsiList = $master->getProvinsi();
 // Mengambil daftar status mahasiswa
@@ -68,28 +68,24 @@ if(isset($_GET['status'])){
                                     <form action="proses/proses-input.php" method="POST">
 									    <div class="card-body">
                                             <div class="mb-3">
-                                                <label for="nim" class="form-label">Nomor Induk Mahasiswa (NIM)</label>
-                                                <input type="number" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM Mahasiswa" required>
+                                                <label for="nik" class="form-label">Nomor Induk Kependudukan (NIK)</label>
+                                                <input type="number" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK Penduduk" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Lengkap Mahasiswa" required>
+                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Lengkap Penduduk" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="prodi" class="form-label">Program Studi</label>
-                                                <select class="form-select" id="prodi" name="prodi" required>
-                                                    <option value="" selected disabled>Pilih Program Studi</option>
-                                                    <?php 
-                                                    // Iterasi daftar program studi dan menampilkannya sebagai opsi dalam dropdown
-                                                    foreach ($prodiList as $prodi){
-                                                        echo '<option value="'.$prodi['id'].'">'.$prodi['nama'].'</option>';
-                                                    }
-                                                    ?>
-                                                </select>
+                                                <label for="tempat" class="form-label">Tempat Lahir</label>
+                                                <input type="text" class="form-control" id="tempat" name="tempat" placeholder="Masukkan Tempat Lahir" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="alamat" class="form-label">Alamat</label>
-                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan Alamat Lengkap Sesuai KTP" required></textarea>
+                                                <label for="tanggal" class="form-label">Tanggal Lahir</label>
+                                                <input type="text" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal Lahir" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tahun" class="form-label">Tahun Lahir</label>
+                                                <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Masukkan Tahun Lahir" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="provinsi" class="form-label">Provinsi</label>
@@ -102,19 +98,29 @@ if(isset($_GET['status'])){
                                                     }
                                                     ?>
                                                 </select>
+                                            <div class="mb-3">
+                                                <label for="domisis" class="form-label">Domisili</label>
+                                                <input type="text" class="form-control" id="domisili" name="domisili" placeholder="Masukkan Domisili " required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Valid dan Benar" required>
+                                                <label for="perkerjaan" class="form-label">Perkerjaan</label>
+                                                <input type="text" class="form-control" id="perkerjaan" name="perkerjaan" placeholder="Masukkan Perkerjaan " required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="telp" class="form-label">Nomor Telepon</label>
-                                                <input type="tel" class="form-control" id="telp" name="telp" placeholder="Masukkan Nomor Telpon/HP" pattern="[0-9+\-\s()]{6,20}" required>
-                                            </div>
+                                                <label for="prodi" class="form-label">Agama</label>
+                                                <select class="form-select" id="prodi" name="prodi" required>
+                                                    <option value="" selected disabled>Pilih Agama</option>
+                                                    <?php 
+                                                    // Iterasi daftar program studi dan menampilkannya sebagai opsi dalam dropdown
+                                                    foreach ($prodiList as $agama){
+                                                        echo '<option value="'.$agama['id'].'">'.$agama['nama'].'</option>';
+                                                    }
+                                                    ?>
+                                                </select>
                                             <div class="mb-3">
-                                                <label for="status" class="form-label">Status</label>
+                                                <label for="status" class="form-label">Gender</label>
                                                 <select class="form-select" id="status" name="status" required>
-                                                    <option value="" selected disabled>Pilih Status</option>
+                                                    <option value="" selected disabled>Pilih Gender</option>
                                                     <?php 
                                                     // Iterasi daftar status mahasiswa dan menampilkannya sebagai opsi dalam dropdown
                                                     foreach ($statusList as $status){
@@ -122,6 +128,15 @@ if(isset($_GET['status'])){
                                                     }
                                                     ?>
                                                 </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="status" class="form-label">Status</label>
+                                                <input type="text" class="form-control" id="status" name="status" placeholder="Masukkan Status " required>
+                                            </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="alamat" class="form-label">Alamat</label>
+                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan Alamat Lengkap Sesuai KTP" required></textarea>
                                             </div>
                                         </div>
 									    <div class="card-footer">

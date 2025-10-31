@@ -1,7 +1,7 @@
 <?php
 
-include_once 'config/class-mahasiswa.php';
-$mahasiswa = new Mahasiswa();
+include_once 'config/class-penduduk.php';
+$Penduduk = new Penduduk();
 // Menampilkan alert berdasarkan status yang diterima melalui parameter GET
 if(isset($_GET['status'])){
 	// Mengecek nilai parameter GET 'status' dan menampilkan alert yang sesuai menggunakan JavaScript

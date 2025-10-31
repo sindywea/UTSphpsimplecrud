@@ -1,20 +1,20 @@
 <?php 
 
 include_once 'config/class-master.php';
-include_once 'config/class-mahasiswa.php';
+include_once 'config/class-penduduk.php';
 $master = new MasterData();
-$mahasiswa = new Mahasiswa();
-// Mengambil daftar program studi, provinsi, dan status mahasiswa
-$prodiList = $master->getProdi();
+$penduduk = new Mahasiswa();
+// Mengambil daftar agama , provinsi, dan status penduduk
+$agamaList = $master->getagama();
 // Mengambil daftar provinsi
 $provinsiList = $master->getProvinsi();
-// Mengambil daftar status mahasiswa
+// Mengambil daftar status penduduk
 $statusList = $master->getStatus();
-// Mengambil data mahasiswa yang akan diedit berdasarkan id dari parameter GET
-$dataMahasiswa = $mahasiswa->getUpdateMahasiswa($_GET['id']);
+// Mengambil data penduduk yang akan diedit berdasarkan id dari parameter GET
+$dataPenduduk = $penduduk->getUpdatePenduduk($_GET['id']);
 if(isset($_GET['status'])){
     if($_GET['status'] == 'failed'){
-        echo "<script>alert('Gagal mengubah data mahasiswa. Silakan coba lagi.');</script>";
+        echo "<script>alert('Gagal mengubah data penduduk. Silakan coba lagi.');</script>";
     }
 }
 ?>
@@ -38,12 +38,12 @@ if(isset($_GET['status'])){
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-6">
-								<h3 class="mb-0">Edit Mahasiswa</h3>
+								<h3 class="mb-0">Edit Penduduk</h3>
 							</div>
 							<div class="col-sm-6">
 								<ol class="breadcrumb float-sm-end">
 									<li class="breadcrumb-item"><a href="index.php">Beranda</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Edit Data</li>
+									<li class="breadcrumb-item active" aria-current="page">Edit Data Penduduk</li>
 								</ol>
 							</div>
 						</div>

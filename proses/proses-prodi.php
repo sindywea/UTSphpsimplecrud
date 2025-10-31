@@ -5,48 +5,48 @@ include '../config/class-master.php';
 // Membuat objek dari class MasterData
 $master = new MasterData();
 // Mengecek aksi yang dilakukan berdasarkan parameter GET 'aksi'
-if($_GET['aksi'] == 'inputprodi'){
-    // Mengambil data prodi dari form input menggunakan metode POST dan menyimpannya dalam array
-    $dataProdi = [
+if($_GET['aksi'] == 'inputagama'){
+    // Mengambil data agama dari form input menggunakan metode POST dan menyimpannya dalam array
+    $dataAgama = [
         'kode' => $_POST['kode'],
         'nama' => $_POST['nama']
     ];
-    // Memanggil method inputProdi untuk memasukkan data prodi dengan parameter array $dataProdi
-    $input = $master->inputProdi($dataProdi);
+    // Memanggil method inputAgama untuk memasukkan data agama dengan parameter array $dataAgama
+    $input = $master->inputAgama($dataAgama);
     if($input){
-        // Jika berhasil, redirect ke halaman master-prodi-list.php dengan status inputsuccess
-        header("Location: ../master-prodi-list.php?status=inputsuccess");
+        // Jika berhasil, redirect ke halaman master-agama-list.php dengan status inputsuccess
+        header("Location: ../master-agama-list.php?status=inputsuccess");
     } else {
-        // Jika gagal, redirect ke halaman master-prodi-input.php dengan status failed
-        header("Location: ../master-prodi-input.php?status=failed");
+        // Jika gagal, redirect ke halaman master-agama-input.php dengan status failed
+        header("Location: ../master-agama-input.php?status=failed");
     }
 } elseif($_GET['aksi'] == 'updateprodi'){
-    // Mengambil data prodi dari form edit menggunakan metode POST dan menyimpannya dalam array
+    // Mengambil data agama dari form edit menggunakan metode POST dan menyimpannya dalam array
     $dataProdi = [
         'id' => $_POST['id'],
         'kode' => $_POST['kode'],
         'nama' => $_POST['nama']
     ];
-    // Memanggil method updateProdi untuk mengupdate data prodi dengan parameter array $dataProdi
-    $update = $master->updateProdi($dataProdi);
+    // Memanggil method updateProdi untuk mengupdate data agama dengan parameter array $dataProdi
+    $update = $master->updateAgama($dataAgama);
     if($update){
-        // Jika berhasil, redirect ke halaman master-prodi-list.php dengan status editsuccess
-        header("Location: ../master-prodi-list.php?status=editsuccess");
+        // Jika berhasil, redirect ke halaman master-agama-list.php dengan status editsuccess
+        header("Location: ../master-agama-list.php?status=editsuccess");
     } else {
-        // Jika gagal, redirect ke halaman master-prodi-edit.php dengan status failed dan membawa id prodi
-        header("Location: ../master-prodi-edit.php?id=".$dataProdi['id']."&status=failed");
+        // Jika gagal, redirect ke halaman master-agama-edit.php dengan status failed dan membawa id Agama
+        header("Location: ../master-agama-edit.php?id=".$dataAgama['id']."&status=failed");
     }
 } elseif($_GET['aksi'] == 'deleteprodi'){
-    // Mengambil id prodi dari parameter GET
+    // Mengambil id agama dari parameter GET
     $id = $_GET['id'];
-    // Memanggil method deleteProdi untuk menghapus data prodi berdasarkan id
-    $delete = $master->deleteProdi($id);
+    // Memanggil method delete Agama untuk menghapus data agama berdasarkan id
+    $delete = $master->deleteAgama($id);
     if($delete){
-        // Jika berhasil, redirect ke halaman master-prodi-list.php dengan status deletesuccess
-        header("Location: ../master-prodi-list.php?status=deletesuccess");
+        // Jika berhasil, redirect ke halaman master-agama-list.php dengan status deletesuccess
+        header("Location: ../master-agama-list.php?status=deletesuccess");
     } else {
-        // Jika gagal, redirect ke halaman master-prodi-list.php dengan status deletefailed
-        header("Location: ../master-prodi-list.php?status=deletefailed");
+        // Jika gagal, redirect ke halaman master-agama-list.php dengan status deletefailed
+        header("Location: ../master-agama-list.php?status=deletefailed");
     }
 }
 
